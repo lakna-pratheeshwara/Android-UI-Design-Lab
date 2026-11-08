@@ -1,5 +1,8 @@
 package com.example.uidesignlab;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.widget.Button;
@@ -18,7 +21,9 @@ import android.util.Log;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DashboardActivity extends AppCompatActivity {
+
+public class DashboardActivity extends AppCompatActivity
+        implements HeaderFragment.OnHeaderInteractionListener {
 
     private static final String TAG = "LifecycleTracker";
 
@@ -64,6 +69,17 @@ public class DashboardActivity extends AppCompatActivity {
                     Uri.parse("https://www.google.com"));
             startActivity(browserIntent);
         });
+
+        // Add DetailFragment at runtime (only the first time)
+        if (savedInstanceState == null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+            DetailFragment detailFrag = new DetailFragment();
+            transaction.add(R.id.dynamic_fragment_container, detailFrag);
+            transaction.commit();
+        }
+
     }
 
     @Override
@@ -87,8 +103,36 @@ public class DashboardActivity extends AppCompatActivity {
                     .setNegativeButton("No", null)
                     .show();
             return true;
+
+        } else if (id == R.id.action_swap) {
+        Fragment current = getSupportFragmentManager()
+                .findFragmentById(R.id.dynamic_fragment_container);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (current instanceof DetailFragment) {
+            transaction.replace(R.id.dynamic_fragment_container, new InfoFragment());
+        } else {
+            transaction.replace(R.id.dynamic_fragment_container, new DetailFragment());
         }
+        transaction.commit();
+        return true;
+    }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onButtonClicked(String data) {
+// Receive data from HeaderFragment and pass it to DetailFragment
+        updateDetail(data);
+    }
+    private void updateDetail(String text) {
+        Fragment current = getSupportFragmentManager()
+                .findFragmentById(R.id.dynamic_fragment_container);
+        if (current instanceof DetailFragment) {
+            ((DetailFragment) current).updateTextView(text);
+        } else {
+            Toast.makeText(this, "Detail area is not showing", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

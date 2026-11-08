@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="header_background">#E3F2FD</color>
+
+    <color name="detail_background">#FFF3E0</color>
+
     <color name="my_custom_color">#1565C0</color>
+
     <color name="laknas_color">#4B0082</color>
+
     <color name="black">#FF000000</color>
+
     <color name="white">#FFFFFFFF</color>
+
 </resources>
 

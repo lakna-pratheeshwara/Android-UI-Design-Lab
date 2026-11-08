@@ -5,9 +5,15 @@
         android:id="@+id/action_settings"
         android:title="@string/menu_settings"
         app:showAsAction="never" />
+
     <item
         android:id="@+id/action_logout"
         android:title="@string/menu_logout"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_swap"
+        android:title="@string/menu_swap"
         app:showAsAction="never" />
 
 </menu>
