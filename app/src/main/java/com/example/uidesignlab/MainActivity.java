@@ -96,6 +96,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                     editor.apply();
 
+            final String nameToSave = userName;
+
+            AppDatabase.databaseExecutor.execute(() -> {
+
+                long id = AppDatabase.getInstance(getApplicationContext())
+                        .userDao()
+                        .insert(new UserRecord(nameToSave));
+
+                Log.d("RoomLab", "Inserted " + nameToSave + ", id = " + id);
+
+            });
+
                     Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                     intent.putExtra("USER_NAME", userName);
                     // data for the next screen

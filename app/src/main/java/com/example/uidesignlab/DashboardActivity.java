@@ -114,6 +114,11 @@ public class DashboardActivity extends AppCompatActivity
             return true;
         }
 
+        if (id == R.id.action_users) {
+            startActivity(new Intent(this, UsersActivity.class));
+            return true;
+        }
+
         if (id == R.id.action_settings) {
             Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
             return true;
@@ -146,6 +151,8 @@ public class DashboardActivity extends AppCompatActivity
     }
 
         return super.onOptionsItemSelected(item);
+
+
     }
 
     @Override

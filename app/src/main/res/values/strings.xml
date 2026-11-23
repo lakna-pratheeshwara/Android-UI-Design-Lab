@@ -1,4 +1,10 @@
 <resources>
+    <string name="users_title">Saved Users</string>
+    <string name="add_john">Add John</string>
+    <string name="clear_all">Clear All</string>
+    <string name="read_provider">Read Provider</string>
+    <string name="menu_users">Saved Users</string>
+
     <string name="notes_title">My Notes</string>
     <string name="note_hint">Write your note here</string>
     <string name="save_note">Save</string>
@@ -42,6 +48,8 @@
     <string name="hello_user">Hello, %1$s!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="profile_saved">Profile Saved Successfully!</string>
 </resources>
 
 
