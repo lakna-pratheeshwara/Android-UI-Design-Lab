@@ -14,6 +14,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     private List<UserRecord> userList;
 
+    public interface OnUserClickListener {
+        void onUserClick(UserRecord user);
+    }
+
+    private OnUserClickListener listener;
+
     public UserAdapter(List<UserRecord> userList) {
         this.userList = userList;
     }
@@ -33,6 +39,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         holder.txtName.setText(user.name);
         holder.txtDate.setText("ID: " + user.id);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onUserClick(user);
+            }
+        });
+
     }
 
     @Override
@@ -50,6 +63,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             txtName = itemView.findViewById(android.R.id.text1);
             txtDate = itemView.findViewById(android.R.id.text2);
         }
+    }
+
+    public void setOnUserClickListener(OnUserClickListener listener) {
+        this.listener = listener;
     }
 
     public void updateUsers(List<UserRecord> newUsers) {

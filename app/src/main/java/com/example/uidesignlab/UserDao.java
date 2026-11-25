@@ -24,6 +24,9 @@ public interface UserDao {
     @Query("SELECT * FROM UserRecord ORDER BY id DESC")
     List<UserRecord> getAll();
 
+    @Query("SELECT COUNT(*) FROM UserRecord WHERE name = :name")
+    int countByName(String name);
+
     @Query("DELETE FROM UserRecord")
     int deleteAll();
 

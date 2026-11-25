@@ -2,10 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+    <permission
+        android:name="com.example.uidesignlab.permission.READ_USERS"
+        android:protectionLevel="normal" />
+
+    <permission
+        android:name="com.example.uidesignlab.permission.WRITE_USERS"
+        android:protectionLevel="normal" />
+
+
+
     <application
-
-
-
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -28,7 +36,9 @@
         <provider
             android:name=".UserProvider"
             android:authorities="com.example.uidesignlab.provider"
-            android:exported="true" />
+            android:exported="true"
+            android:readPermission="com.example.uidesignlab.permission.READ_USERS"
+            android:writePermission="com.example.uidesignlab.permission.WRITE_USERS" />
 
         <activity
             android:name=".DashboardActivity"

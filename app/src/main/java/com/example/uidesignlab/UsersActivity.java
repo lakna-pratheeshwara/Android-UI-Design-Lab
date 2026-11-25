@@ -40,6 +40,23 @@ public class UsersActivity extends AppCompatActivity {
 
         adapter = new UserAdapter(userList);
 
+        adapter.setOnUserClickListener(user -> {
+
+            AppDatabase.databaseExecutor.execute(() -> {
+
+                db.userDao().delete(user);
+
+                runOnUiThread(() -> {
+                    Toast.makeText(this, user.name + " Deleted",
+                            Toast.LENGTH_SHORT).show();
+
+                    loadUsers();
+                });
+
+            });
+
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 

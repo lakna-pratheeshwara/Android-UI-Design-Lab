@@ -18,6 +18,8 @@ public class UserRecord {
     @ColumnInfo(name = "created_at")
     public long createdAt;
 
+
+
     public UserRecord(@NonNull String name) {
         this.name = name;
         this.createdAt = System.currentTimeMillis();

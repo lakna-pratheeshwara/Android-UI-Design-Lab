@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     () -> btnSave.setBackgroundColor(COLOR_NORMAL), 1000);
 
 
+
             toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 200);
 
             TextView result = new TextView(this);
@@ -100,11 +101,23 @@ public class MainActivity extends AppCompatActivity {
 
             AppDatabase.databaseExecutor.execute(() -> {
 
-                long id = AppDatabase.getInstance(getApplicationContext())
+                int count = AppDatabase.getInstance(getApplicationContext())
                         .userDao()
-                        .insert(new UserRecord(nameToSave));
+                        .countByName(nameToSave);
 
-                Log.d("RoomLab", "Inserted " + nameToSave + ", id = " + id);
+                if (count == 0) {
+
+                    long id = AppDatabase.getInstance(getApplicationContext())
+                            .userDao()
+                            .insert(new UserRecord(nameToSave));
+
+                    Log.d("RoomLab", "Inserted " + nameToSave + ", id = " + id);
+
+                } else {
+
+                    Log.d("RoomLab", "Duplicate name found: " + nameToSave);
+
+                }
 
             });
 
